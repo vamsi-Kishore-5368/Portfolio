@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sanapala Vamsi Kishore | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: #fff;
+      background:
+        radial-gradient(ellipse 60% 40% at 50% 55%, rgba(153, 97, 255, 0.32) 0%, rgba(18,9,43,0.85) 70%, transparent 100%),
+        linear-gradient(180deg, #170a2d 0%, #12092b 100%);
+      background-color: #12092b;
+    }
+    /* Animated background */
+    .animated-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .menu-bar {
+      width: 100%;
+      background: #23233a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      box-shadow: 0 2px 16px #0003;
+    }
+    .menu-bar ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+    .menu-bar li {
+      margin: 0 1.5rem;
+      padding: 1.2rem 0;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: #fff;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .menu-bar li.active, .menu-bar li:hover {
+      color: #ffb347;
+    }
+    .menu-bar li.active::after, .menu-bar li:hover::after {
+      content: '';
+      display: block;
+      margin: 0 auto;
+      width: 60%;
+      border-bottom: 2px solid #ffb347;
+      padding-top: 4px;
+    }
+    .section-block {
+      display: none;
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 4rem auto 0 auto;
+      background: rgba(34,34,59,0.95);
+      border-radius: 18px;
+      box-shadow: 0 4px 32px #0005;
+      padding: 2.5rem 2rem;
+      animation: fadeIn 0.7s;
+    }
+    .section-block.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .profile-photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #ffb347;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 16px #0007;
+    }
+    .main-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0.5rem 0 0.2rem 0;
+      letter-spacing: 1px;
+      color: #ffb347;
+    }
+    .subtitle {
+      font-size: 1.2rem;
+      color: #f2e9e4;
+      margin-bottom: 0.5rem;
+    }
+    .info-list {
+      margin: 1.5rem 0 0 0;
+      padding: 0;
+      list-style: none;
+      font-size: 1.1rem;
+    }
+    .info-list li {
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .info-list a {
+      color: #ffb347;
+      text-decoration: none;
+      transition: text-decoration 0.2s;
+    }
+    .info-list a:hover {
+      text-decoration: underline;
+    }
+    h2 {
+      color: #ffb347;
+      border-bottom: 2px solid #39395f;
+      padding-bottom: 0.3rem;
+      margin-bottom: 1.2rem;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+    }
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.1rem;
+      list-style: none;
+      padding: 0;
+    }
+    .skills-list li {
+      background: #23233a;
+      color: #fff;
+      padding: 0.5rem 1.2rem 0.5rem 0.7rem;
+      border-radius: 7px;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 2px 8px #0002;
+    }
+    .skills-list img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      background: #fff2;
+      border-radius: 4px;
+    }
+    .edu-item, .exp-item, .proj-item {
+      margin-bottom: 1.2rem;
+    }
+    .edu-title, .exp-title, .proj-title {
+      font-weight: bold;
+      color: #ffb347;
+      font-size: 1.1rem;
+    }
+    .cert-list, .achieve-list {
+      list-style: disc inside;
+      color: #fff;
+      margin-left: 1.2rem;
+    }
+    .cert-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    .cert-card {
+      background: #23233a;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px #0002;
+      padding: 0.8rem 1.2rem;
+      border: 2px solid transparent;
+      transition: 
+        box-shadow 0.3s,
+        border 0.3s,
+        background 0.3s;
+      font-size: 1.05rem;
+    }
+    .cert-card:hover {
+      border: 2px solid #ffb347;
+      background: #28284a;
+      box-shadow: 0 4px 24px #ffb34733, 0 2px 16px #0005;
+      cursor: pointer;
+    }
+    .contact-links {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 1.1rem;
+    }
+    .contact-links a, .contact-links span {
+      color: #ffb347;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 1.1rem;
+    }
+    .contact-links a:hover {
+      text-decoration: underline;
+    }
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      align-items: stretch;
+      position: relative;
+    }
+    .skill-block {
+      background: #23233a;
+      color: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 16px #0004;
+      padding: 1.5rem 1.2rem;
+      min-width: 220px;
+      min-height: 90px;
+      flex: 1 1 220px;
+      max-width: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      border: 2px solid transparent;
+      position: relative;
+      overflow: visible;
+      transition: 
+        transform 0.3s cubic-bezier(.4,2,.6,1),
+        box-shadow 0.3s,
+        border 0.3s,
+        min-height 0.3s;
+      left: 0;
+      cursor: pointer;
+    }
+    .skill-block .skill-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      width: 100%;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+    .skill-content {
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      pointer-events: none;
+      transition: opacity 0.3s, max-height 0.3s;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+    .skill-block:hover,
+    .skill-block:focus {
+      z-index: 3;
+      border: 2.5px solid #ffe6a1;
+      box-shadow: 0 4px 32px #ffb34755, 0 2px 16px #0007;
+      transform: scale(1.13);
+      min-height: 220px;
+    }
+    .skill-block:hover .skill-content,
+    .skill-block:focus .skill-content {
+      opacity: 1;
+      max-height: 400px;
+      pointer-events: auto;
+      margin-top: 0.7rem;
+    }
+    .skill-block .skill-icons {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.7rem;
+      flex-wrap: wrap;
+    }
+    .skill-block .skill-icons img {
+      width: 32px;
+      height: 32px;
+      background: #fff2;
+      border-radius: 6px;
+      padding: 2px;
+    }
+    .skill-block ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      font-size: 1.05rem;
+    }
+    .skill-block li {
+      margin-bottom: 0.3rem;
+    }
+    .comet {
+      display: none !important;
+    }
+    @media (max-width: 900px) {
+      .skills-grid {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: stretch;
+      }
+      .skill-block {
+        left: 0 !important;
+        transform: scale(1) !important;
+      }
+    }
+    .glow-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.6rem 1.5rem;
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: #23233a;
+      background: #ffb347; /* Use the same orange as headings */
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 0 0 #ffb347;
+      transition: 
+        box-shadow 0.3s,
+        background 0.3s,
+        color 0.3s;
+      position: relative;
+      cursor: pointer;
+      outline: none;
+    }
+    .glow-btn:hover, .glow-btn:focus {
+      background: #fff8dc;
+      color: #23233a;
+      box-shadow: 0 0 16px 4px #ffb347, 0 0 32px 8px #ffb34755;
+      text-shadow: 0 0 8px #fff, 0 0 16px #ffb347;
+    }
+    .edu-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1.5rem;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .edu-right {
+      min-width: 120px;
+      text-align: right;
+      color: #ffe6a1;
+      font-weight: 600;
+      font-size: 1.08rem;
+      margin-top: 0.2rem;
+    }
+    .edu-item .glow-btn {
+      margin-left: auto;
+      margin-top: 1.2rem;
+      display: block;
+    }
+    @media (max-width: 600px) {
+      .edu-flex {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+      }
+      .edu-right {
+        text-align: left;
+        margin-top: 0.1rem;
+      }
+      .edu-item .glow-btn {
+        margin-left: 0;
+      }
+    }
+    .exp-item, .proj-item {
+      background: #23233a;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px #0002;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.2rem;
+      border: 2px solid transparent;
+      transition: 
+        box-shadow 0.3s,
+        border 0.3s,
+        background 0.3s;
+    }
+
+    .exp-item:hover, .proj-item:hover {
+      border: 2px solid #ffb347;
+      background: #28284a;
+      box-shadow: 0 4px 24px #ffb34733, 0 2px 16px #0005;
+      cursor: pointer;
+    }
+
+    /* Add after your existing .edu-item styles */
+    .edu-item {
+      background: #23233a;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px #0002;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.2rem;
+      border: 2px solid transparent;
+      transition: 
+        box-shadow 0.3s,
+        border 0.3s,
+        background 0.3s;
+    }
+
+    .edu-item:hover {
+      border: 2px solid #ffb347;
+      background: #28284a;
+      box-shadow: 0 4px 24px #ffb34733, 0 2px 16px #0005;
+      cursor: pointer;
+    }
+
+    /* Hamburger styles */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 38px;
+  height: 38px;
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 100;
+  cursor: pointer;
+  background: #23233a;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px #0003;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 3px;
+  margin: 4px 0;
+  background: #ffb347;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* Show hamburger and hide menu-bar on small screens */
+@media (max-width: 900px) {
+  .hamburger {
+    display: flex;
+  }
+  .menu-bar {
+    display: none;
+    position: fixed;
+    top: 60px;
+    right: 18px;
+    background: #23233a;
+    border-radius: 10px;
+    box-shadow: 0 2px 16px #0007;
+    width: 180px;
+    z-index: 99;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.5rem 0;
+    animation: fadeIn 0.3s;
+  }
+  .menu-bar.open {
+    display: flex;
+  }
+  .menu-bar ul {
+    flex-direction: column;
+    width: 100%;
+  }
+  .menu-bar li {
+    margin: 0;
+    padding: 1rem 1.5rem;
+    width: 100%;
+    text-align: left;
+    border-bottom: 1px solid #39395f;
+  }
+  .menu-bar li:last-child {
+    border-bottom: none;
+  }
+}
+  </style>
+</head>
+<body>
+  <canvas class="animated-bg"></canvas>
+  <div class="hamburger" id="hamburger-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <nav class="menu-bar">
+    <ul>
+      <li class="active" data-section="home">Home</li>
+      <li data-section="about">About</li>
+      <li data-section="education">Education</li>
+      <li data-section="skills">Skills</li>
+      <li data-section="experience">Experience</li>
+      <li data-section="projects">Projects</li>
+      <li data-section="certifications">Certifications</li>
+      <li data-section="contact">Contact</li>
+    </ul>
+  </nav>
+
+  <!-- Home Section -->
+  <div class="section-block active" id="home">
+    <div style="text-align:center;">
+      <img src="https://i.imgur.com/1Q9Z1Zm.png" alt="Profile Photo" class="profile-photo">
+      <div class="main-title">Sanapala Vamsi Kishore</div>
+      <div class="subtitle">
+      Aspiring Machine Learning Engineer & Data Scientist<br>
+      Electronic Engineer | AI Enthusiast
+    </div>
+      <ul class="info-list" style="justify-content:center;">
+        <li><i class="fa-solid fa-location-dot"></i> Vijayawada, India</li>
+        <li><i class="fa-solid fa-envelope"></i> <a href="mailto:vamsi.carrer2026@gmail.com">vamsi.carrer2026@gmail.com</a></li>
+        <li><i class="fa-solid fa-phone"></i> 9063235368</li>
+        <li><i class="fa-brands fa-linkedin"></i> <a href="https://www.linkedin.com/in/vamsi-kishore-8497bb210" target="_blank">Vamsi Kishore</a></li>
+      </ul>
+    </div>
+  </div>
+
+  
+
+  <!-- Education Section -->
+  <div class="section-block" id="education">
+    <h2>Education</h2>
+    <div class="edu-item edu-flex">
+      <div>
+        <div class="edu-title">Vellore Institute of Technology, Amaravati</div>
+        <div>Bachelor of Technology in Electronics Communication Engineering</div>
+        <div>Oct 2022 – 2026 (Expected)</div>
+        <a href="coursework.html" class="glow-btn" target="_blank" style="margin-left:0; padding:0.35rem 0; font-size:0.95rem; width:fit-content; min-width:0;">Coursework</a>
+      </div>
+      <div class="edu-right">CGPA: 9.16</div>
+    </div>
+    <div class="edu-item edu-flex">
+      <div>
+        <div class="edu-title">Sainik School Korukonda, Vizianagaram</div>
+        <div><strong>Class 12 (MPC stream)</strong></div>
+        <div>June 2020 – 2022</div>
+      </div>
+      <div class="edu-right">Percentage: 85%</div>
+    </div>
+    <div class="edu-item edu-flex">
+      <div>
+        <div class="edu-title">Sainik School Korukonda, Vizianagaram</div>
+        <div><strong>Class 10</strong></div>
+        <div>June 2019 – 2020</div>
+      </div>
+      <div class="edu-right">Percentage: 87%</div>
+    </div>
+  </div>
+
+  <!-- Skills Section -->
+  <div class="section-block" id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <!-- Programming Languages -->
+      <div class="skill-block" tabindex="0">
+        <div class="skill-title"><i class="fa-solid fa-code"></i> Programming Languages</div>
+        <div class="skill-content">
+          <div class="skill-icons">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" title="Python">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" title="Java">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" title="HTML">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" title="CSS">
+          </div>
+          <ul>
+            <li>Python (Proficient)</li>
+            <li>Java (DSA)</li>
+            <li>HTML</li>
+            <li>CSS</li>
+          </ul>
+        </div>
+        <span class="comet"></span>
+      </div>
+      <!-- Technologies -->
+      <div class="skill-block" tabindex="0">
+        <div class="skill-title"><i class="fa-solid fa-microchip"></i> Technologies</div>
+        <div class="skill-content">
+          <div class="skill-icons">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="TensorFlow" title="TensorFlow">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy" title="NumPy">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas" title="Pandas">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg" alt="Matplotlib" title="Matplotlib">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rstudio/rstudio-original.svg" alt="R Studio" title="R Studio">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matlab/matlab-original.svg" alt="Matlab" title="Matlab">
+          </div>
+          <ul>
+            <li>TensorFlow</li>
+            <li>NumPy</li>
+            <li>Pandas</li>
+            <li>Matplotlib</li>
+            <li>R Studio</li>
+            <li>Matlab</li>
+            <li>Machine Learning</li>
+            <li>Data Compression</li>
+            <li>Algorithms Efficiency</li>
+            <li>Information Retrieval</li>
+          </ul>
+        </div>
+        <span class="comet"></span>
+      </div>
+      <!-- Tools -->
+      <div class="skill-block" tabindex="0">
+        <div class="skill-title"><i class="fa-solid fa-wrench"></i> Tools</div>
+        <div class="skill-content">
+          <div class="skill-icons">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" title="Docker">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" title="Git">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-original.svg" alt="Wix" title="Wix Studio">
+          </div>
+          <ul>
+            <li>Docker</li>
+            <li>Git</li>
+            <li>Wix Studio</li>
+          </ul>
+        </div>
+        <span class="comet"></span>
+      </div>
+      <!-- Object Oriented Programming -->
+      <div class="skill-block" tabindex="0">
+        <div class="skill-title"><i class="fa-solid fa-cubes"></i> Object Oriented Programming</div>
+        <div class="skill-content">
+          <div class="skill-icons">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" title="Java">
+          </div>
+          <ul>
+            <li>Object Oriented Programming (Java)</li>
+          </ul>
+        </div>
+        <span class="comet"></span>
+      </div>
+      <!-- Scripting Languages -->
+      <div class="skill-block" tabindex="0">
+        <div class="skill-title"><i class="fa-solid fa-terminal"></i> Scripting Languages</div>
+        <div class="skill-content">
+          <div class="skill-icons">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" alt="Bash" title="Bash">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/perl/perl-original.svg" alt="Perl" title="Perl">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" title="Python">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="TCL" title="TCL">
+          </div>
+          <ul>
+            <li>Bash</li>
+            <li>Perl</li>
+            <li>TCL</li>
+            <li>Python</li>
+          </ul>
+        </div>
+        <span class="comet"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Experience Section -->
+  <div class="section-block" id="experience">
+    <h2>Experience</h2>
+    <div class="exp-item">
+      <div class="exp-title">Machine Learning Club – VIT AP</div>
+      <div>
+        Core member of the Research Department, actively collaborating on real-world problem statements using advanced Deep Learning and Machine Learning algorithms. Consistently contribute to end-to-end solutions, from research and model development to deployment in live projects for the Project Department. Demonstrated strong teamwork, innovation, and technical expertise in delivering scalable AI solutions that address practical challenges.
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-title">Diabetes Prediction Research – VIT AP</div>
+      <div>
+        Served as team lead in a four-member group, driving the analysis and transformation of large-scale diabetes datasets. Leveraged data mining, data visualization, and advanced data science techniques to extract insights and prepare data for modeling. Led the development and implementation of machine learning models for accurate diabetes prediction, ensuring robust data handling and impactful results.
+      </div>
+    </div>
+  </div>
+
+  <!-- Projects Section -->
+  <div class="section-block" id="projects">
+    <h2>Projects</h2>
+    <div class="proj-item">
+      <div class="proj-title">Vehicle Tracking System using GPS and GSM module</div>
+      <div>
+        Developed an intelligent vehicle tracking system that senses alcohol levels and detects accident status in real time. The system automatically sends alerts to nearby hospitals and police stations, including detailed information about the vehicle owner and precise vehicle location. This project aims to significantly reduce accident fatalities by ensuring immediate medical response through seamless connectivity with emergency services.
+      </div>
+    </div>
+    <div class="proj-item">
+      <div class="proj-title">Machine Learning Model for Diabetes Prediction</div>
+      <div>
+        Designed and implemented a machine learning model in Python utilizing libraries such as Scikit Learn, NumPy, and Pandas to predict diabetes outcomes from real-world data. Explored and compared multiple algorithms, including Logistic Regression, Naïve Bayes, and Random Forest, to optimize predictive performance.
+        <br><br>
+        <strong>Achieved:</strong> <span style="color:#ffb347;">83.33% accuracy</span> and <span style="color:#ffb347;">RMSE score of 0.0279</span>, demonstrating strong analytical and model evaluation skills.
+      </div>
+    </div>
+    <div class="proj-item">
+      <div class="proj-title">Machine Learning Model for Crop Yield Prediction</div>
+      <div>
+        Developed a robust machine learning solution in Python to predict crop yields based on agricultural parameters from a Kaggle dataset. Applied linear regression techniques to analyze and model the data, enabling accurate yield predictions and supporting data-driven decision-making in agriculture.
+        <br><br>
+        <strong>Achieved:</strong> <span style="color:#ffb347;">93.66% accuracy</span> and <span style="color:#ffb347;">RMSE score of 0.2508</span>, demonstrating strong model performance and analytical skills.
+      </div>
+    </div>
+  </div>
+
+  <!-- Certifications Section -->
+  <div class="section-block" id="certifications">
+    <h2>Certifications</h2>
+    <div class="cert-list">
+      <div class="cert-card" style="display: flex; justify-content: space-between; align-items: center;">
+        <span>DSA in Java - Scalar</span>
+        <a href="https://drive.google.com/file/d/19y2fXCNV1s6Om9X2ZYnwOkGaln8KxiaT/view?usp=sharing" class="glow-btn" target="_blank" style="margin-top:0; margin-left:1.2rem; padding:0.35rem 0.9rem; font-size:0.97rem; width:fit-content; min-width:0;">View Credential</a>
+      </div>
+      <div class="cert-card" style="display: flex; justify-content: space-between; align-items: center;">
+        <span>HTML - Great Learning</span>
+        <a href="https://drive.google.com/file/d/1dCrXxrA79jHDs96UO7bx0vkB3s-1e0tz/view?usp=drive_link" class="glow-btn" target="_blank" style="margin-top:0; margin-left:1.2rem; padding:0.35rem 0.9rem; font-size:0.97rem; width:fit-content; min-width:0;">View Credential</a>
+      </div>
+      <div class="cert-card" style="display: flex; justify-content: space-between; align-items: center;">
+        <span>Python - Cisco Networking Academy</span>
+        <a href="https://drive.google.com/file/d/1vb2mlkRn_KQk7oahBhcb_FXeDbtBvEd-/view?usp=drive_link" class="glow-btn" target="_blank" style="margin-top:0; margin-left:1.2rem; padding:0.35rem 0.9rem; font-size:0.97rem; width:fit-content; min-width:0;">View Credential</a>
+      </div>
+      <div class="cert-card" style="display: flex; justify-content: space-between; align-items: center;">
+        <span>CSS - Simplilearn</span>
+        <a href="https://drive.google.com/file/d/1gtE9gA4joN9aK49KXzpAMtMSGHZvDbIZ/view?usp=drive_link" class="glow-btn" target="_blank" style="margin-top:0; margin-left:1.2rem; padding:0.35rem 0.9rem; font-size:0.97rem; width:fit-content; min-width:0;">View Credential</a>
+      </div>
+      <div class="cert-card" style="display: flex; justify-content: space-between; align-items: center;">
+        <span>Python: Data Science (Packages) - Simplilearn</span>
+        <a href="https://drive.google.com/file/d/1Kcevh2fHjzaCSBOm7SJXiTAvs8ta8z5p/view?usp=drive_link" class="glow-btn" target="_blank" style="margin-top:0; margin-left:1.2rem; padding:0.35rem 0.9rem; font-size:0.97rem; width:fit-content; min-width:0;">View Credential</a>
+      </div>
+    </div>
+    <h2 style="margin-top:2rem;">Achievements</h2>
+    <ul class="achieve-list">
+      <li>NCC A Certification Vizianagaram (Dec 2020)</li>
+      <li>NCC B Certification Vizianagaram (June 2022, ‘A’ grade)</li>
+      <li>Merit Awardee in Academics (VIT AP, CGPA 9.18)</li>
+      <li>School Cadet Sports Captain (2021-2022)</li>
+      <li>International Level Inter school football Championship (Sep 2020)</li>
+    </ul>
+  </div>
+
+  <!-- Contact Section -->
+  <div class="section-block" id="contact">
+    <h2>Contact</h2>
+    <div class="contact-links">
+      <a href="mailto:vamsi.carrer2026@gmail.com"><i class="fa-solid fa-envelope"></i>vamsi.carrer2026@gmail.com</a>
+      <a href="https://www.linkedin.com/in/vamsi-kishore-8497bb210" target="_blank"><i class="fa-brands fa-linkedin"></i>Vamsi Kishore</a>
+      <span><i class="fa-solid fa-phone"></i>9063235368</span>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <div class="section-block" id="about">
+    <h2>About</h2>
+    <p>
+      I am a passionate and results-driven B.Tech student at Vellore Institute of Technology, Amaravati, specializing in Electronics and Communication Engineering. With a strong foundation in Python, Java, and modern data science tools, I thrive on solving real-world problems through innovative machine learning and deep learning solutions. My experience spans leading research teams, deploying scalable AI models, and collaborating on impactful projects that bridge the gap between research and practical application.
+      <br><br>
+      I have demonstrated leadership as a team lead in data-driven research, and have a proven track record of delivering high-accuracy models for healthcare and agriculture domains. My technical expertise is complemented by a commitment to continuous learning, adaptability, and a collaborative spirit—qualities that align with the culture of world-class technology companies. I am eager to contribute my skills, creativity, and drive for excellence to organizations that value innovation, impact, and growth.
+    </p>
+  </div>
+
+  <script>
+    // Menu navigation
+    const menuItems = document.querySelectorAll('.menu-bar li');
+    const sections = document.querySelectorAll('.section-block');
+    menuItems.forEach(item => {
+      item.addEventListener('click', () => {
+        menuItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        sections.forEach(sec => sec.classList.remove('active'));
+        document.getElementById(item.dataset.section).classList.add('active');
+      });
+    });
+
+    // Animated background: Neural network nodes and connections + simple chip shapes
+    const canvas = document.querySelector('.animated-bg');
+    const ctx = canvas.getContext('2d');
+    let w = window.innerWidth, h = window.innerHeight;
+    canvas.width = w; canvas.height = h;
+
+    const NODE_COUNT = 22;
+    const nodes = [];
+    for (let i = 0; i < NODE_COUNT; i++) {
+      nodes.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: 7 + Math.random() * 7,
+        dx: (Math.random() - 0.5) * 0.4,
+        dy: (Math.random() - 0.5) * 0.4,
+        color: "#ffb347"
+      });
+    }
+
+    // Chip shapes data (simple square chips)
+    const CHIP_COUNT = 5;
+    const chips = [];
+    for (let i = 0; i < CHIP_COUNT; i++) {
+      chips.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        size: 38 + Math.random() * 32,
+        angle: Math.random() * Math.PI * 2,
+        speed: (Math.random() - 0.5) * 0.003 + 0.001
+      });
+    }
+
+    function drawChip(cx, cy, size, angle) {
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(angle);
+      // Main chip body
+      ctx.globalAlpha = 0.13;
+      ctx.fillStyle = "#ffe6a1";
+      ctx.strokeStyle = "#ffb347";
+      ctx.lineWidth = 2.2;
+      ctx.beginPath();
+      ctx.rect(-size/2, -size/2, size, size);
+      ctx.fill();
+      ctx.stroke();
+      // Pins
+      ctx.lineWidth = 1.2;
+      for (let i = -1; i <= 1; i += 2) {
+        for (let j = -1; j <= 1; j += 2) {
+          for (let k = -1; k <= 1; k += 2) {
+            ctx.beginPath();
+            ctx.moveTo(i*size/2, j*size/2);
+            ctx.lineTo(i*size/2 + k*size*0.18, j*size/2 + k*size*0.18);
+            ctx.stroke();
+          }
+        }
+      }
+      ctx.restore();
+      ctx.globalAlpha = 1;
+    }
+
+    function drawConnections() {
+      // Node-to-node connections
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 180) {
+            ctx.save();
+            ctx.globalAlpha = 0.13 + (1 - dist / 180) * 0.18;
+            ctx.strokeStyle = "#ffb347";
+            ctx.lineWidth = 2.4;
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.stroke();
+            ctx.restore();
+          }
+        }
+      }
+      // Node-to-chip connections
+      for (let node of nodes) {
+        for (let chip of chips) {
+          const dx = node.x - chip.x;
+          const dy = node.y - chip.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 180) {
+            ctx.save();
+            ctx.globalAlpha = 0.13 + (1 - dist / 180) * 0.18;
+            ctx.strokeStyle = "#ffb347";
+            ctx.lineWidth = 2.4;
+            ctx.beginPath();
+            ctx.moveTo(node.x, node.y);
+            ctx.lineTo(chip.x, chip.y);
+            ctx.stroke();
+            ctx.restore();
+          }
+        }
+      }
+      // Chip-to-chip connections (optional, comment out if not needed)
+      
+      for (let i = 0; i < chips.length; i++) {
+        for (let j = i + 1; j < chips.length; j++) {
+          const dx = chips[i].x - chips[j].x;
+          const dy = chips[i].y - chips[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 220) {
+            ctx.save();
+            ctx.globalAlpha = 0.10 + (1 - dist / 220) * 0.13;
+            ctx.strokeStyle = "#ffb347";
+            ctx.lineWidth = 2.4;
+            ctx.beginPath();
+            ctx.moveTo(chips[i].x, chips[i].y);
+            ctx.lineTo(chips[j].x, chips[j].y);
+            ctx.stroke();
+            ctx.restore();
+          }
+        }
+      }
+      
+    }
+
+    function animateBG() {
+      ctx.clearRect(0, 0, w, h);
+
+      // Draw chips
+      for (let chip of chips) {
+        drawChip(chip.x, chip.y, chip.size, chip.angle);
+        chip.angle += chip.speed;
+        chip.x += Math.sin(chip.angle) * 0.07;
+        chip.y += Math.cos(chip.angle) * 0.07;
+        if (chip.x < -chip.size) chip.x = w + chip.size;
+        if (chip.x > w + chip.size) chip.x = -chip.size;
+        if (chip.y < -chip.size) chip.y = h + chip.size;
+        if (chip.y > h + chip.size) chip.y = -chip.size;
+      }
+
+      drawConnections();
+      for (let node of nodes) {
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.r, 0, 2 * Math.PI);
+        ctx.fillStyle = node.color;
+        ctx.globalAlpha = 0.7;
+        ctx.shadowColor = "#ffb347";
+        ctx.shadowBlur = 12;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+        ctx.shadowBlur = 0;
+        node.x += node.dx;
+        node.y += node.dy;
+        if (node.x < 0 || node.x > w) node.dx *= -1;
+        if (node.y < 0 || node.y > h) node.dy *= -1;
+      }
+      requestAnimationFrame(animateBG);
+    }
+    animateBG();
+
+    window.addEventListener('resize', () => {
+      w = window.innerWidth; h = window.innerHeight;
+      canvas.width = w; canvas.height = h;
+    });
+
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger-menu');
+const menuBar = document.querySelector('.menu-bar');
+hamburger.addEventListener('click', () => {
+  menuBar.classList.toggle('open');
+});
+// Optional: Close menu when a section is selected (for better UX)
+menuItems.forEach(item => {
+  item.addEventListener('click', () => {
+    if (window.innerWidth <= 900) {
+      menuBar.classList.remove('open');
+    }
+  });
+});
+  </script>
+</body>
+</html>

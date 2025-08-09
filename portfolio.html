@@ -510,11 +510,10 @@
   <!-- Home Section -->
   <div class="section-block active" id="home">
     <div style="text-align:center;">
-      <img src="https://i.imgur.com/1Q9Z1Zm.png" alt="Profile Photo" class="profile-photo">
+      <img src="profile.jpg" alt="Profile Photo" class="profile-photo" id="profile-photo" style="cursor:pointer;">
       <div class="main-title">Sanapala Vamsi Kishore</div>
       <div class="subtitle">
-      Aspiring Machine Learning Engineer & Data Scientist<br>
-      Electronic Engineer | AI Enthusiast
+      Electronic Engineer | Data Analyser | AI Enthusiast
     </div>
       <ul class="info-list" style="justify-content:center;">
         <li><i class="fa-solid fa-location-dot"></i> Vijayawada, India</li>
@@ -525,7 +524,11 @@
     </div>
   </div>
 
-  
+  <!-- Add modal for enlarged profile photo -->
+  <div id="photo-modal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); align-items:center; justify-content:center;">
+    <span id="close-modal" style="position:absolute; top:32px; right:48px; font-size:2.5rem; color:#fff; cursor:pointer; font-weight:bold;">&times;</span>
+    <img src="profile.jpg" alt="Profile Photo Large" style="max-width:90vw; max-height:85vh; border-radius:18px; box-shadow:0 4px 32px #000a;">
+  </div>
 
   <!-- Education Section -->
   <div class="section-block" id="education">
@@ -537,7 +540,7 @@
         <div>Oct 2022 – 2026 (Expected)</div>
         <a href="coursework.html" class="glow-btn" target="_blank" style="margin-left:0; padding:0.35rem 0; font-size:0.95rem; width:fit-content; min-width:0;">Coursework</a>
       </div>
-      <div class="edu-right">CGPA: 9.16</div>
+      <div class="edu-right">CGPA: 9.19</div>
     </div>
     <div class="edu-item edu-flex">
       <div>
@@ -948,6 +951,23 @@ menuItems.forEach(item => {
     }
   });
 });
+
+    // Profile photo modal logic
+    const profilePhoto = document.getElementById('profile-photo');
+    const photoModal = document.getElementById('photo-modal');
+    const closeModal = document.getElementById('close-modal');
+    profilePhoto.addEventListener('click', () => {
+      photoModal.style.display = 'flex';
+    });
+    closeModal.addEventListener('click', () => {
+      photoModal.style.display = 'none';
+    });
+    // Close modal on outside click
+    photoModal.addEventListener('click', (e) => {
+      if (e.target === photoModal) {
+        photoModal.style.display = 'none';
+      }
+    });
   </script>
 </body>
 </html>
